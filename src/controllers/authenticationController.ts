@@ -120,7 +120,10 @@ export default class AuthenticationController {
 
     if (
       this.hasUserAgeLimitEnabled &&
-      !isOlderThan(AGE_LIMIT)(parse(spidUser.dateOfBirth), new Date())
+      !isOlderThan(AGE_LIMIT)(/* TODO: JSFIX could not patch the breaking change:
+      now functions don't accept string arguments, but only numbers or dates.  
+      Suggested fix: The input string should now be parsed beforehand. Use parse or parseISO (if you’re using ISO 8601) to parse your strings. */
+      parse(spidUser.dateOfBirth), new Date())
     ) {
       // The IO App show the proper error screen if only the `errorCode`
       // query param is provided and `errorMessage` is missing.
