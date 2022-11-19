@@ -79,7 +79,12 @@ export function toBirthDate(fiscalCode: FiscalCode): Option<Date> {
  * ie. convert 1980-13-1 to 1980-13-01
  */
 export function formatDate(dateStr: string): string {
-  return format(dateStr, "YYYY-MM-DD");
+  return (
+    /* TODO: JSFIX could not patch the breaking change:
+    now functions don't accept string arguments, but only numbers or dates.  
+    Suggested fix: The input string should now be parsed beforehand. Use parse or parseISO (if you’re using ISO 8601) to parse your strings. */
+    format(dateStr, "YYYY-MM-DD")
+  );
 }
 
 const isDate = (v: t.mixed): v is Date => v instanceof Date;
